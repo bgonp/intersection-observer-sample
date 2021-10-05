@@ -1,4 +1,11 @@
-.App {
+body {
   font-family: sans-serif;
   text-align: center;
+  overflow: hidden;
+  height: 100vh;
+}
+
+ul {
+  height: 100vh;
+  overflow: auto;
 }
