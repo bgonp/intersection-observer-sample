@@ -3,9 +3,12 @@ body {
   text-align: center;
   overflow: hidden;
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 ul {
   height: 100vh;
   overflow: auto;
+  margin: 0;
 }

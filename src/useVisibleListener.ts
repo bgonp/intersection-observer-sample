@@ -21,6 +21,8 @@ const useVisibleListener = (
     const observer = new IntersectionObserver(triggeredAction, options);
 
     observer.observe(childRef.current);
+
+    return () => observer.disconnect();
   }, [callback, marginPercentage]);
 
   return { parentRef, childRef };

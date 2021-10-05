@@ -1,20 +1,23 @@
-import useInfiniteScroll from "./useInfiniteScroll";
+import useVisibleListener from "./useVisibleListener";
 
 import "./styles.css";
+import { useState } from "react";
 
 const ELEMS = 100;
 
 const getRandomString = () => Math.random().toString(36).split(".")[1];
 
 export default function App() {
-  const { parentRef, childRef } = useInfiniteScroll(() =>
-    console.log("triggered")
-  );
+  const [isLoading, setIsLoading] = useState(false);
+  const { parentRef, childRef } = useVisibleListener(() => {
+    if (isLoading) return;
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 5000);
+    console.log("triggered", isLoading);
+  });
 
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
       <ul ref={parentRef}>
         {[...Array(ELEMS)].map((_, i) => {
           if (i < ELEMS - 1) return <li key={i}>{getRandomString()}</li>;
@@ -24,6 +27,7 @@ export default function App() {
             </li>
           );
         })}
+        {isLoading && <li>Loading...</li>}
       </ul>
     </div>
   );
